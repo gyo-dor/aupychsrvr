@@ -1,1 +1,1 @@
-pipenv run uvicorn main:app --reload --port=5000
+pipenv run uvicorn main_api:app --reload --port=5000

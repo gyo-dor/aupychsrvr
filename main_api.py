@@ -1,6 +1,11 @@
 from fastapi import FastAPI
-from engine import ServerEngine, Response
+from engine import ServerEngine, Response, update_last_request_time
 import os
+
+
+### Configure startup things ###
+
+update_last_request_time()
 
 app = FastAPI()
 
@@ -10,12 +15,7 @@ if "nt" in os.name:
 
 engine: ServerEngine = None
 
-def initialize_engine_first(func):
-    def inner_function(*args, **kwargs):
-        return func(*args, **kwargs) if engine is not None else Response.error("Engine is not initialized.")
-    return inner_function
-
-# TODO Passed testing can play more than 2 games with same engine lifecycle.
+### End setup configuration ###
 
 
 @app.get("/ping")

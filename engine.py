@@ -1,12 +1,20 @@
 import traceback
 import chess
 import chess.engine
-import random
+import time
+
+
+def update_last_request_time():
+    with open(".time", "w") as time_file:
+        time_file.write(str(int(time.time())))
+        time_file.flush()
 
 
 def safe_response(func):
+    
     def inner_function(*args, **kwargs):
         try:
+            update_last_request_time()
             return func(*args, **kwargs)
         except Exception as e:
             tb = f"{e} | {traceback.format_exc()}"
