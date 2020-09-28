@@ -14,6 +14,7 @@ sudo apt upgrade -y
 
 sudo apt install -y wget
 sudo apt install -y zip
+sudo apt install -y net-tools
 
 sudo apt install -y software-properties-common
 sudo add-apt-repository ppa:deadsnakes/ppa
@@ -35,4 +36,6 @@ filename='stockfish_20092708_x64_avx2'
 
 wget https://abrok.eu/stockfish/builds/1dbd2a1ad548b3ca676f7da949e1a998c64b836b/linux64avx2/stockfish_20092708_x64_avx2.zip
 unzip "$filename.zip"
-mv $filename ./engines/linux
+
+mv $filename engine
+mv engine ./engines/linux

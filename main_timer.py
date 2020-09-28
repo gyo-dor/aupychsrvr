@@ -25,7 +25,7 @@ def send_telegram_message():
 def shutdown():
     # Stop API
     # Stop GCP Instance
-    pass
+    os.system("sudo shutdown -h now")
 
 
 def main():
