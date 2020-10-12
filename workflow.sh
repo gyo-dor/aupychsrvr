@@ -1,9 +1,11 @@
 
 echo "###############################################"
+echo "TODO: Download syzgy endgame tablebase."
+echo "TODO: Setup autostart script"
 echo "EXPECTED WORKFLOW. (You must be installed Git and cloned this. You now should be at the cloned folder.)"
 echo "1. Install Python 3.7 and pipenv."
 echo "2. Install requirements.txt and then lock pipenv."
-echo "3. Downloading Stockfish Chess Engine."
+echo "3. Download Stockfish Chess Engine."
 echo "4. Unzipping, then rename to 'engine', then move to ./engines/linux."
 echo "5. Configuring Reboot Autostart Engine."
 echo "6. Restart then see if it launches on startup."
@@ -18,24 +20,24 @@ sudo apt install -y net-tools
 
 sudo apt install -y software-properties-common
 sudo add-apt-repository ppa:deadsnakes/ppa
-echo -ne '\n'
 
 sudo apt install -y python3.7
-sudo apt install -y python3-pip
 
-sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 1
+alias python3.7='/usr/bin/python3.7'
 
-pip3 install pipenv
-python3 -m pipenv install
+sudo python3.7 -m pip install pipenv
+sudo python3.7 -m pipenv install
 
 echo "###############################################"
 echo "Downloading and configuring Stockfish Chess Engine"
 echo "###############################################"
 
-filename='stockfish_20092708_x64_avx2'
+filename='stockfish_20100519_x64_bmi2'
 
-wget https://abrok.eu/stockfish/builds/1dbd2a1ad548b3ca676f7da949e1a998c64b836b/linux64avx2/stockfish_20092708_x64_avx2.zip
+wget https://abrok.eu/stockfish/builds/767b4f4fbe5ab2e63aceabd9005f4e1eb7cbcb51/linux64bmi2/stockfish_20100519_x64_bmi2.zip
 unzip "$filename.zip"
-
+rm engines/linux
+rm engines/windows
+mkdir engines/linux
 mv $filename engine
-mv engine ./engines/linux
+mv engine engines/linux
