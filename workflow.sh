@@ -29,9 +29,8 @@ alias python3.7='/usr/bin/python3.7'
 sudo python3.7 -m pip install pipenv
 sudo python3.7 -m pipenv install
 
-cd ../
-
-sudo mv aupychsrvr /usr/share
 sudo mv chess-server.service /etc/systemd/system
+cd ../
+sudo mv aupychsrvr /usr/share
 
 sudo systemctl disable ufw
