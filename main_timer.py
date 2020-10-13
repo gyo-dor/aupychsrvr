@@ -1,6 +1,7 @@
 import time
 import os
 import telegram
+from requests import get
 
 IDLE_TIME_UNTIL_SHUTDOWN_SECS = 60 * 60  # ONE HOUR OF INACTIVE
 
@@ -27,7 +28,9 @@ def shutdown():
 
 
 def main():
-    send_telegram_message("VM just started.")
+    ip = get('https://api.ipify.org').text
+    send_telegram_message(f"VM just started. IP: {ip}")
+    
     while True:
         time.sleep(60)
         elapsed = get_time_since_last_request()

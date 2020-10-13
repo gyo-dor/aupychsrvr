@@ -3,8 +3,7 @@ from engine import ServerEngine, Response, update_last_request_time
 import os
 
 
-### Configure startup things ###
-
+""" Configure startup things """
 update_last_request_time()
 
 app = FastAPI()
@@ -14,8 +13,7 @@ if "nt" in os.name:
     engine_path = os.path.join("engines", "windows", "engine.exe")
 
 engine: ServerEngine = None
-
-### End setup configuration ###
+""" End setup configuration """
 
 
 @app.get("/ping")
