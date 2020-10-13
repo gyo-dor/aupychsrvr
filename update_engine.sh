@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "###############################################"
 echo "TODO: Downloading and configuring Stockfish Chess Engine"
 echo "###############################################"
