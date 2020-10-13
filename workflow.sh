@@ -24,7 +24,8 @@ sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt install -y python3.7
 sudo apt install -y python3-pip
 
-alias python3.7='/usr/bin/python3.7'
+echo "alias python3.7='/usr/bin/python3.7'" >> ~/.bashrc
+. ~/.bashrc
 
 sudo python3.7 -m pip install pipenv
 sudo python3.7 -m pipenv install
