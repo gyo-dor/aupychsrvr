@@ -1,9 +1,7 @@
 [Unit]
 Description=Chess Engine Server
-After=network-online.target
-# After=network.target
-# After=systemd-user-sessions.service
-
+Requires=chessdisk.mount
+After=network-online.target chessdisk.mount
 
 [Service]
 # User=root
