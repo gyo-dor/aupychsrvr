@@ -1,8 +1,9 @@
 [Unit]
 Description=Chess Engine Server
+After=network-online.target
 # After=network.target
 # After=systemd-user-sessions.service
-# After=network-online.target
+
 
 [Service]
 # User=root
@@ -13,8 +14,8 @@ ExecStart=/chessdisk/aupychsrvr/start.sh
 # ExecReload=/home/transang/startup.sh reload
 # ExecStop=/home/transang/startup.sh stop
 # TimeoutSec=30
-# Restart=on-failure
-# RestartSec=30
+Restart=on-failure
+RestartSec=15
 # StartLimitInterval=350
 # StartLimitBurst=10
 
