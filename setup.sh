@@ -33,13 +33,12 @@ echo "[==== Configuring data disk ====]"
 
 mt_dir='/chessdisk'
 size='4G'
+lsblk -o NAME,HCTL,SIZE,MOUNTPOINT | grep -i "sd"
 
 if sudo grep -qs $mt_dir /proc/mounts; then
     echo "The disk was mounted. No need to mount again."
 else
     echo "Mounting the disk..."
-    sudo mkdir $mt_dir
-
     sda_disks=$(lsblk -o NAME,SIZE,MOUNTPOINT | grep -i "sd" | grep -i $size)
     disk_loc=''
 
@@ -58,16 +57,23 @@ else
         disk_loc='/dev/sdc1'
     fi
 
+    if [[ $sda_disks == *"sdd1"* ]]; then
+        echo "Disk is in sdd1!"
+        disk_loc='/dev/sdd1'
+    fi
+
     disk_symbol=${disk_loc:0:8}
     fs_uuid=$(blkid -o value -s UUID $disk_loc)
-
     sudo parted $disk_symbol --script mklabel gpt mkpart xfspart xfs 0% 100%
     sudo mkfs.xfs $disk_loc
     sudo partprobe $disk_loc
-    sudo echo "UUID=$fs_uuid /datadrive xfs defaults,nofail 1 2" >> /etc/fstab
-
+    sudo mkdir $mt_dir
+    sudo mount $disk_loc $mt_dir
+    sudo echo "UUID=$fs_uuid $mt_dir xfs defaults,nofail 1 2" >> /etc/fstab
     echo "Finished mount disk."
 fi
+
+lsblk -o NAME,HCTL,SIZE,MOUNTPOINT | grep -i "sd"
 
 
 echo "[==== Configuring chess server ====]"
