@@ -45,16 +45,13 @@ else
     if [[ $sd_disks == *"sda"* ]]; then
         echo "Disk is in sda!"
         disk_loc='/dev/sda1'
-    fi
-    if [[ $sd_disks == *"sdb"* ]]; then
+    elif [[ $sd_disks == *"sdb"* ]]; then
         echo "Disk is in sdb!"
         disk_loc='/dev/sdb1'
-    fi
-    if [[ $sd_disks == *"sdc"* ]]; then
+    elif [[ $sd_disks == *"sdc"* ]]; then
         echo "Disk is in sdc!"
         disk_loc='/dev/sdc1'
-    fi
-    if [[ $sd_disks == *"sdd"* ]]; then
+    elif [[ $sd_disks == *"sdd"* ]]; then
         echo "Disk is in sdd!"
         disk_loc='/dev/sdd1'
     fi
