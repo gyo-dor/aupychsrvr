@@ -39,25 +39,25 @@ if sudo grep -qs $mt_dir /proc/mounts; then
     echo "The disk was mounted. No need to mount again."
 else
     echo "Mounting the disk..."
-    sda_disks=$(lsblk -o NAME,SIZE,MOUNTPOINT | grep -i "sd" | grep -i $size)
+    sd_disks=$(lsblk -o NAME,SIZE,MOUNTPOINT | grep -i "sd" | grep -i $size)
     disk_loc=''
 
-    if [[ $sda_disks == *"sda1"* ]]; then
+    if [[ $sd_disks == *"sda1"* ]]; then
         echo "Disk is in sda1!"
         disk_loc='/dev/sda1'
     fi
 
-    if [[ $sda_disks == *"sdb1"* ]]; then
+    if [[ $sd_disks == *"sdb1"* ]]; then
         echo "Disk is in sdb1!"
         disk_loc='/dev/sdb1'
     fi
 
-    if [[ $sda_disks == *"sdc1"* ]]; then
+    if [[ $sd_disks == *"sdc1"* ]]; then
         echo "Disk is in sdc1!"
         disk_loc='/dev/sdc1'
     fi
 
-    if [[ $sda_disks == *"sdd1"* ]]; then
+    if [[ $sd_disks == *"sdd1"* ]]; then
         echo "Disk is in sdd1!"
         disk_loc='/dev/sdd1'
     fi
