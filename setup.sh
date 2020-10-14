@@ -76,12 +76,11 @@ lsblk -o NAME,HCTL,SIZE,MOUNTPOINT | grep -i "sd"
 echo "[==== Configuring chess server ====]"
 
 sudo mv chess-server.service /etc/systemd/system
-sudo mkdir /home/chess-server
 
 cd ../
-sudo mv aupychsrvr /home/chess-server
+sudo mv aupychsrvr $mt_dir
 
-cd /home/chess-server/aupychsrvr
+cd "$mt_dir/aupychsrvr"
 sudo python3.7 -m pip install pipenv
 sudo python3.7 -m pipenv install
 
