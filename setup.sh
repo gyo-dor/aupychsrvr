@@ -12,12 +12,14 @@ echo "###############################################"
 
 
 echo "[== Installing dependencies ==]"
+
 sudo apt update -y
 sudo apt upgrade -y
 
 sudo apt install -y wget
 sudo apt install -y zip
 sudo apt install -y net-tools
+sudo apt install -y ufw
 
 sudo apt install -y software-properties-common
 sudo add-apt-repository ppa:deadsnakes/ppa
@@ -76,10 +78,19 @@ sudo mv chess-server.service /etc/systemd/system
 
 cd ../
 sudo mv aupychsrvr $mt_dir
+sudo chmod -R 777 $mt_dir
 
 cd "$mt_dir/aupychsrvr"
 sudo python3.7 -m pip install pipenv
 sudo python3.7 -m pipenv install
 
-sudo systemctl disable ufw
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+
+sudo ufw allow 22
+sudo ufw allow 80
+sudo ufw allow 443
+sudo ufw allow 5080
+sudo ufw enable
+
 sudo systemctl enable chess-server.service
