@@ -65,6 +65,7 @@ else
     sudo partprobe $disk_loc
     sudo mkdir $mt_dir
     sudo mount $disk_loc $mt_dir
+    sudo chmod -R 777 $mt_dir
     sudo echo "UUID=$fs_uuid $mt_dir xfs defaults,nofail 1 2" >> /etc/fstab
     echo "Finished mount disk."
 fi
@@ -77,6 +78,7 @@ echo "[==== Configuring chess server ====]"
 sudo mv chess-server.service /etc/systemd/system
 
 cd ../
+sudo rm -r "$mt_dir/aupychsrvr"
 sudo mv aupychsrvr $mt_dir
 sudo chmod -R 777 $mt_dir
 
